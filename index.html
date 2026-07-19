@@ -559,42 +559,61 @@
         const statsEl = document.querySelector('[data-template-id="stats-section"]');
         if (statsEl) statsObserver.observe(statsEl);
 
-            // Contact form with Data SDK
-            (async () => {
-                const handler = { onDataChanged() {} };
-                const initResult = await window.dataSdk.init(handler);
-    
-                document.getElementById('contact-form').addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const btn = document.querySelector('[data-template-id="form-submit"]');
-                    const status = document.getElementById('form-status');
-                    btn.disabled = true;
-                    btn.style.opacity = '0.6';
-    
-                    const record = {
-                        full_name: document.getElementById('f-name').value,
-                        phone_number: document.getElementById('f-phone').value,
-                        email: document.getElementById('f-email').value,
-                        country: document.getElementById('f-country').value,
-                        interested_course: document.getElementById('f-course').value,
-                        message: document.getElementById('f-message').value,
-                        submitted_at: new Date().toISOString()
-                    };
-    
-                    const result = await window.dataSdk.create(record);
-                    status.classList.remove('hidden');
-                    if (result.isOk) {
-                        status.textContent = '✓ Your inquiry has been submitted successfully!';
-                        status.className = 'text-center text-sm text-green-600 font-medium';
-                        e.target.reset();
-                } else {
-                    status.textContent = 'Something went wrong. Please try again.';
-                    status.className = 'text-center text-sm text-red-600 font-medium';
-                }
-                btn.disabled = false;
-                btn.style.opacity = '1';
-            });
-        })();
+// Contact Form with Web3Forms
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const btn = document.querySelector('[data-template-id="form-submit"]');
+    const status = document.getElementById('form-status');
+
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+
+    const formData = {
+        access_key: "YOUR_WEB3FORMS_ACCESS_KEY",
+
+        subject: "New Inquiry from Skill2Fly Website",
+        from_name: "Skill2Fly Website",
+
+        name: document.getElementById('f-name').value,
+        phone: document.getElementById('f-phone').value,
+        email: document.getElementById('f-email').value,
+        country: document.getElementById('f-country').value,
+        interested_course: document.getElementById('f-course').value,
+        message: document.getElementById('f-message').value
+    };
+
+    try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        status.classList.remove('hidden');
+
+        if (data.success) {
+            status.textContent = "✓ Your inquiry has been submitted successfully!";
+            status.className = "text-center text-sm text-green-600 font-medium";
+            e.target.reset();
+        } else {
+            status.textContent = "❌ Submission failed. Please try again.";
+            status.className = "text-center text-sm text-red-600 font-medium";
+        }
+
+    } catch (error) {
+        status.classList.remove('hidden');
+        status.textContent = "❌ Network error. Please try again.";
+        status.className = "text-center text-sm text-red-600 font-medium";
+    }
+
+    btn.disabled = false;
+    btn.style.opacity = '1';
+});
 
         lucide.createIcons();
     </script>
