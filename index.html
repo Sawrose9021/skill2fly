@@ -483,7 +483,7 @@
       <div class="space-y-2 text-sm text-gray-600">
        <p>Kathmandu, Nepal</p>
        <p>info@skill2fly.com</p>
-       <p>+977 980-0000000</p>
+       <p>+977 9713419340</p>
       </div>
       <div class="flex gap-3 mt-4"><a href="#" class="text-navy hover:text-orange transition-colors"><i data-lucide="facebook" style="width:20px;height:20px"></i></a> <a href="#" class="text-navy hover:text-orange transition-colors"><i data-lucide="instagram" style="width:20px;height:20px"></i></a> <a href="#" class="text-navy hover:text-orange transition-colors"><i data-lucide="linkedin" style="width:20px;height:20px"></i></a>
       </div>
@@ -559,34 +559,34 @@
         const statsEl = document.querySelector('[data-template-id="stats-section"]');
         if (statsEl) statsObserver.observe(statsEl);
 
-        // Contact form with Data SDK
-        (async () => {
-            const handler = { onDataChanged() {} };
-            const initResult = await window.dataSdk.init(handler);
-
-            document.getElementById('contact-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const btn = document.querySelector('[data-template-id="form-submit"]');
-                const status = document.getElementById('form-status');
-                btn.disabled = true;
-                btn.style.opacity = '0.6';
-
-                const record = {
-                    full_name: document.getElementById('f-name').value,
-                    phone_number: document.getElementById('f-phone').value,
-                    email: document.getElementById('f-email').value,
-                    country: document.getElementById('f-country').value,
-                    interested_course: document.getElementById('f-course').value,
-                    message: document.getElementById('f-message').value,
-                    submitted_at: new Date().toISOString()
-                };
-
-                const result = await window.dataSdk.create(record);
-                status.classList.remove('hidden');
-                if (result.isOk) {
-                    status.textContent = '✓ Your inquiry has been submitted successfully!';
-                    status.className = 'text-center text-sm text-green-600 font-medium';
-                    e.target.reset();
+            // Contact form with Data SDK
+            (async () => {
+                const handler = { onDataChanged() {} };
+                const initResult = await window.dataSdk.init(handler);
+    
+                document.getElementById('contact-form').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const btn = document.querySelector('[data-template-id="form-submit"]');
+                    const status = document.getElementById('form-status');
+                    btn.disabled = true;
+                    btn.style.opacity = '0.6';
+    
+                    const record = {
+                        full_name: document.getElementById('f-name').value,
+                        phone_number: document.getElementById('f-phone').value,
+                        email: document.getElementById('f-email').value,
+                        country: document.getElementById('f-country').value,
+                        interested_course: document.getElementById('f-course').value,
+                        message: document.getElementById('f-message').value,
+                        submitted_at: new Date().toISOString()
+                    };
+    
+                    const result = await window.dataSdk.create(record);
+                    status.classList.remove('hidden');
+                    if (result.isOk) {
+                        status.textContent = '✓ Your inquiry has been submitted successfully!';
+                        status.className = 'text-center text-sm text-green-600 font-medium';
+                        e.target.reset();
                 } else {
                     status.textContent = 'Something went wrong. Please try again.';
                     status.className = 'text-center text-sm text-red-600 font-medium';
