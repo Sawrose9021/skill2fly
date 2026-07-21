@@ -691,9 +691,36 @@ const response = await fetch("https://api.web3forms.com/submit", {
     btn.disabled = false;
     btn.style.opacity = '1';
 });
+// ======================================
+// Premium Back To Top Button
+// ======================================
 
+const backToTop = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+        backToTop.classList.remove("hidden");
+    } else {
+        backToTop.classList.add("hidden");
+    }
+});
+
+backToTop.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
         lucide.createIcons();
     </script>
- 
-</body></html>
+ <!-- Premium Back To Top Button -->
+<button
+    id="backToTop"
+    class="fixed bottom-8 right-8 z-50 hidden w-14 h-14 rounded-full bg-gradient-to-br from-[#153E7E] to-[#1E4F9C] text-white shadow-[0_12px_35px_rgba(21,62,126,0.35)] hover:scale-110 transition-all duration-300 flex items-center justify-center"
+    aria-label="Back to Top">
+
+    <i data-lucide="chevron-up" class="w-7 h-7"></i>
+</button>
+</body>
+</html>
 
