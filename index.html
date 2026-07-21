@@ -704,7 +704,6 @@ window.addEventListener("scroll", () => {
         backToTop.classList.add("hidden");
     }
 });
-
 backToTop.addEventListener("click", () => {
     window.scrollTo({
         top: 0,
@@ -720,10 +719,9 @@ backToTop.addEventListener("click", () => {
  <!-- Premium Back To Top Button -->
 <button
     id="backToTop"
-    class="fixed bottom-8 right-8 z-50 hidden w-14 h-14 rounded-full bg-gradient-to-br from-[#153E7E] to-[#1E4F9C] text-white shadow-[0_12px_35px_rgba(21,62,126,0.35)] hover:scale-110 transition-all duration-300 flex items-center justify-center"
+    class="fixed bottom-8 right-8 z-50 hidden w-14 h-14 rounded-full bg-gradient-to-br from-[#153E7E] to-[#1E4F9C] text-white shadow-[0_12px_35px_rgba(21,62,126,0.35)] hover:scale-110 transition-all duration-300 flex items-center justify-center text-2xl font-bold"
     aria-label="Back to Top">
-
-    <i data-lucide="chevron-up" class="w-7 h-7"></i>
+    &#8593;
 </button>
 </body>
 </html>
